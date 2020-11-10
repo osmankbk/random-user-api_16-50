@@ -6,33 +6,30 @@ const personPhone = document.querySelector('#phone');
 const personEmail = document.querySelector('#email');
 const button = document.querySelector('button');
 
-//Data fetching function.
+//data fetching function.
 async function getPerson(url) {
    try{
     const request = await fetch(url);
     const response = await request.json()
-    return response.results[0];
+    return Promise.all(response.results);
 } catch(error) {
     error.status
     }
 }
 
-//Passing fetch data into DOM function.
+//Passing fetch user into DOM function.
 const fillInfo = (data) => {
-    const {
-        phone,
-        email,
-} = data;
-
-    personPic.src = data.picture.large;
-    personFirstName.textContent = data.name.first;
-    personLastName.textContent = data.name.last;
-    personLocation.textContent = data.location.street.name
-    personPhone.textContent = phone;
-    personEmail.textContent = email;
+    data.forEach(user => {
+        personPic.src = user.picture.large;
+        personFirstName.textContent = user.name.first;
+        personLastName.textContent = user.name.last;
+        personLocation.textContent = user.location.street.name
+        personPhone.textContent = user.phone;
+        personEmail.textContent = user.email;
+    });
 }
 
-//Show data click event.
+//Show user click event.
 button.addEventListener('click', () => {
     getPerson(`https://randomuser.me/api/`).then(fillInfo);
 })
