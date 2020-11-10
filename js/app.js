@@ -16,8 +16,6 @@ async function getPerson(url) {
     error.status
     }
 }
-console.log(getPerson(`https://randomuser.me/api/`))
-
 
 //Passing fetch data into DOM function.
 const fillInfo = (data) => {
