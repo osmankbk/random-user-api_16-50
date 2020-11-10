@@ -13,7 +13,8 @@ async function getPerson(url) {
     const response = await request.json()
     return Promise.all(response.results);
 } catch(error) {
-    error.status
+    error.status;
+    error.message;
     }
 }
 
